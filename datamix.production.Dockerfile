@@ -60,7 +60,7 @@ RUN bash -c ' \
   # downgrade to prod dependencies \
   sudo -u docker -E env HOME=/home/docker PATH=$PATH bundle install --without test development; \
   sudo -u docker -E env HOME=/home/docker PATH=$PATH bundle clean --force; \
-  yarn add wsrun; \
+  yarn add -W wsrun; \
   yarn install --prod; \
   \
   # now some cleanup... \
