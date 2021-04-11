@@ -5,8 +5,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR....
       - aws --version
-      - eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')
-      - REPOSITORY_URI=public.ecr.aws/q5u8m0m4/datamix-canvas-lms
+      - eval $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/q5u8m0m4)
+      - REPOSITORY_URI=public.ecr.aws/q5u8m0m4/canvas-lms-test
       - IMAGE_TAG=latest
   build:
     commands:
