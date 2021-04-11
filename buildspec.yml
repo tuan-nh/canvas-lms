@@ -12,7 +12,7 @@ phases:
     commands:
       - echo installing composer..
       - echo Building the Docker image...
-      - docker build -f ubuntu.production.Dockerfile -t $REPOSITORY_URI:latest .
+      - docker build -f datamix.production.Dockerfile -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
