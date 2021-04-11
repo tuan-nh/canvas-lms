@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build: # commands to be run before build
+    commands:
+      - echo Logging in to Amazon ECR....
+      - aws --version
+      - eval $(aws ecr get-login --region us-east-1 --no-include-email | sed 's|https://||')
+      - REPOSITORY_URI=public.ecr.aws/q5u8m0m4/datamix-canvas-lms
+      - IMAGE_TAG=latest
+  build:
+    commands:
+      - echo installing composer..
+      - echo Building the Docker image...
+      - docker build -f ubuntu.production.Dockerfile -t $REPOSITORY_URI:latest .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker image ls -a
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
